@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Schaad.Finance/bin/Debug
+/Schaad.Finance/obj
+*.user
+/Schaad.Finance.Api/bin/Debug/netstandard2.0
+/Schaad.Finance.Api/obj
+/Schaad.Finance.Tests/bin/Debug/netcoreapp2.0
+/Schaad.Finance.Tests/obj
+/Schaad.Finance.Api/.vs/Schaad.Finances.Api
+/.vs/Schaad.Finance

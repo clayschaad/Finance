@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04">
+    <BkToCstmrStmt>
+        <GrpHdr>
+            <MsgId>MSG-C053-190706014611-01</MsgId>
+            <CreDtTm>2019-07-06T00:00:00</CreDtTm>
+            <MsgPgntn>
+                <PgNb>1</PgNb>
+                <LastPgInd>true</LastPgInd>
+            </MsgPgntn>
+            <AddtlInf>RECONSTRUCTION</AddtlInf>
+        </GrpHdr>
+        <Stmt>
+            <Id>STM-C053-190706014611-02</Id>
+            <ElctrncSeqNb>999999</ElctrncSeqNb>
+            <CreDtTm>2019-07-06T00:00:00</CreDtTm>
+            <FrToDt>
+                <FrDtTm>2019-07-01T00:00:00</FrDtTm>
+                <ToDtTm>2019-07-05T00:00:00</ToDtTm>
+            </FrToDt>
+            <CpyDplctInd>DUPL</CpyDplctInd>
+            <Acct>
+                <Id>
+                    <IBAN>CH3789144975191379986</IBAN>
+                </Id>
+                <Ownr>
+                    <Nm>Schaad Claudio</Nm>
+                </Ownr>
+            </Acct>
+            <Bal>
+                <Tp>
+                    <CdOrPrtry>
+                        <Cd>OPBD</Cd>
+                    </CdOrPrtry>
+                </Tp>
+                <Amt Ccy="CHF">2468.71</Amt>
+                <CdtDbtInd>CRDT</CdtDbtInd>
+                <Dt>
+                    <Dt>2019-07-01</Dt>
+                </Dt>
+            </Bal>
+            <Bal>
+                <Tp>
+                    <CdOrPrtry>
+                        <Cd>CLBD</Cd>
+                    </CdOrPrtry>
+                </Tp>
+                <Amt Ccy="CHF">2444.01</Amt>
+                <CdtDbtInd>CRDT</CdtDbtInd>
+                <Dt>
+                    <Dt>2019-07-05</Dt>
+                </Dt>
+            </Bal>
+            <TxsSummry>
+                <TtlDbtNtries>
+                    <NbOfNtries>2</NbOfNtries>
+                    <Sum>24.70</Sum>
+                </TtlDbtNtries>
+            </TxsSummry>
+            <Ntry>
+                <NtryRef>1532133113</NtryRef>
+                <Amt Ccy="CHF">15.45</Amt>
+                <CdtDbtInd>DBIT</CdtDbtInd>
+                <Sts>BOOK</Sts>
+                <BookgDt>
+                    <Dt>2019-07-01</Dt>
+                </BookgDt>
+                <ValDt>
+                    <Dt>2019-06-28</Dt>
+                </ValDt>
+                <BkTxCd>
+                    <Domn>
+                        <Cd>PMNT</Cd>
+                        <Fmly>
+                            <Cd>*</Cd>
+                            <SubFmlyCd>*</SubFmlyCd>
+                        </Fmly>
+                    </Domn>
+                </BkTxCd>
+                <NtryDtls>
+                    <TxDtls>
+                        <Amt Ccy="CHF">15.45</Amt>
+                        <CdtDbtInd>DBIT</CdtDbtInd>
+                        <BkTxCd>
+                            <Domn>
+<Cd>PMNT</Cd>
+<Fmly>
+    <Cd>*</Cd>
+    <SubFmlyCd>*</SubFmlyCd>
+</Fmly>
+                            </Domn>
+                        </BkTxCd>
+                        <RltdPties/>
+                        <RmtInf>
+                            <Ustrd>Migros M EX Sihlpass</Ustrd>
+                        </RmtInf>
+                        <AddtlTxInf>Warenbezug und Dienstleistungen
+Migros M EX Sihlpass
+Maestro Karte
+Kartennummer xxx
+28.06.2019 18:43</AddtlTxInf>
+                    </TxDtls>
+                </NtryDtls>
+                <AddtlNtryInf>Warenbezug und Dienstleistungen
+Migros M EX Sihlpass
+Maestro Karte
+Kartennummer xxx
+28.06.2019 18:43</AddtlNtryInf>
+            </Ntry>
+            <Ntry>
+                <NtryRef>1531481701</NtryRef>
+                <Amt Ccy="CHF">9.25</Amt>
+                <CdtDbtInd>DBIT</CdtDbtInd>
+                <Sts>BOOK</Sts>
+                <BookgDt>
+                    <Dt>2019-07-01</Dt>
+                </BookgDt>
+                <ValDt>
+                    <Dt>2019-06-28</Dt>
+                </ValDt>
+                <BkTxCd>
+                    <Domn>
+                        <Cd>PMNT</Cd>
+                        <Fmly>
+                            <Cd>*</Cd>
+                            <SubFmlyCd>*</SubFmlyCd>
+                        </Fmly>
+                    </Domn>
+                </BkTxCd>
+                <NtryDtls>
+                    <TxDtls>
+                        <Amt Ccy="CHF">9.25</Amt>
+                        <CdtDbtInd>DBIT</CdtDbtInd>
+                        <BkTxCd>
+                            <Domn>
+<Cd>PMNT</Cd>
+<Fmly>
+    <Cd>*</Cd>
+    <SubFmlyCd>*</SubFmlyCd>
+</Fmly>
+                            </Domn>
+                        </BkTxCd>
+                        <RltdPties/>
+                        <RmtInf>
+                            <Ustrd>Coop-5013 ZH Maagpla</Ustrd>
+                        </RmtInf>
+                        <AddtlTxInf>Warenbezug und Dienstleistungen
+Coop-5013 ZH Maagpla
+Maestro Karte
+Kartennummer xxx
+28.06.2019 06:49</AddtlTxInf>
+                    </TxDtls>
+                </NtryDtls>
+                <AddtlNtryInf>Warenbezug und Dienstleistungen
+Coop-5013 ZH Maagpla
+Maestro Karte
+Kartennummer xxx
+28.06.2019 06:49</AddtlNtryInf>
+            </Ntry>  
+        </Stmt>
+    </BkToCstmrStmt>
+</Document>
