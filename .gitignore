@@ -11,3 +11,6 @@
 /Schaad.Finance.Tests/obj
 /Schaad.Finance.Api/.vs/Schaad.Finances.Api
 /.vs/Schaad.Finance
+/Schaad.Finance/bin/Release/netstandard2.0
+/Schaad.Finance.Tests/bin/Release/netcoreapp2.0
+/Schaad.Finance.Api/bin/Release/netstandard2.0
