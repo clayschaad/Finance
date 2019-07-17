@@ -2,6 +2,7 @@
 {
     public enum CreditCardProvider
     {
-        Cembra
+        CembraCsv,
+        CembraPdf
     }
 }
