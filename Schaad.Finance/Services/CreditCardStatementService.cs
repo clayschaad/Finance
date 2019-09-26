@@ -49,7 +49,20 @@ namespace Schaad.Finance.Services
 
         private IReadOnlyList<CreditCardTransaction> ParseCembraPdf(string filePath)
         {
-            var text = pdfParsingService.ExtractText(filePath, 2);
+            var transactionList = new List<CreditCardTransaction>();
+            var totalPages = pdfParsingService.GetTotalPages(filePath);
+
+            for (int i = 2; i < totalPages; i++)
+            {
+                transactionList.AddRange(ParseCembraPdfPage(filePath, i));
+            }
+
+            return transactionList;
+        }
+
+        private IReadOnlyList<CreditCardTransaction> ParseCembraPdfPage(string filePath, int page)
+        {
+            var text = pdfParsingService.ExtractText(filePath, page);
 
             var transactionList = new List<CreditCardTransaction>();
 
@@ -109,7 +122,7 @@ namespace Schaad.Finance.Services
             var transactionText = nextPart.part;
 
             nextPart = GetNextPartUntilSpace(nextPart.rest, 2);
-            var amount = nextPart.part;
+            var amount = nextPart.part.Replace("'", "");
 
             return new CreditCardTransaction
             {

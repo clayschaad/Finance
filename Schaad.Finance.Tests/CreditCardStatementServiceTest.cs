@@ -44,5 +44,15 @@ namespace Schaad.Finance.Tests
             Assert.That(transactions.Count, Is.EqualTo(2));
             Assert.That(transactions.Sum(t => t.Amount), Is.EqualTo(37.20m));
         }
+
+        //[Test]
+        //public void ReadFile_CembraPdf2()
+        //{
+        //    var service2 = new CreditCardStatementService(new PdfParsingService());
+        //    var transactions = service2.ReadFile(CreditCardProvider.CembraPdf, @"D:\Desktop\20190923_Cembra.pdf", System.Text.Encoding.UTF8);
+
+        //    Assert.That(transactions.Count, Is.EqualTo(2));
+        //    Assert.That(transactions.Sum(t => t.Amount), Is.EqualTo(37.20m));
+        //}
     }
 }

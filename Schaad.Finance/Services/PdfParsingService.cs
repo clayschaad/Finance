@@ -7,6 +7,14 @@ namespace Schaad.Finance.Services
 {
     public class PdfParsingService : IPdfParsingService
     {
+		public int GetTotalPages(string file)
+        {
+            var document = new PdfDocument();
+            document.LoadFromFile(file);
+            var pages = document.Pages.Count;
+            return pages;
+        }
+		
         public IReadOnlyList<string> ExtractText(string file, int page)
         {
             var document = new PdfDocument();
