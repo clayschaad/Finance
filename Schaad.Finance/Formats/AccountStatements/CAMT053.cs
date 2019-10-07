@@ -106,7 +106,7 @@ namespace Schaad.Finance.Formats.AccountStatements
 
                                 transaction.Id = stmt.Id + entry.NtryRef;
                                 transaction.BookingDate = entry.BookgDt.Item;
-                                transaction.Text = entry.AddtlNtryInf;
+                                transaction.Text = ParseEntry(entry);
                                 transaction.Value = (double)entry.Amt.Value;
                                 transaction.ValueDate = entry.ValDt.Item;
 
@@ -121,6 +121,38 @@ namespace Schaad.Finance.Formats.AccountStatements
             }
 
             return accountStatements;
+        }
+
+        private string ParseEntry(ReportEntry4 entry)
+        {
+            var set = new HashSet<string>();
+            foreach (var addtlNtryInf in SplitForNewline(entry.AddtlNtryInf).Where(a => !string.IsNullOrEmpty(a)))
+            {
+                set.Add(addtlNtryInf);
+            }
+            foreach (var ntryDtl in entry.NtryDtls)
+            {
+                foreach (var txDtl in ntryDtl.TxDtls)
+                {
+                    if (txDtl.RmtInf?.Ustrd != null)
+                    {
+                        foreach (var ustrd in txDtl.RmtInf.Ustrd)
+                        {
+                            foreach (var info in SplitForNewline(ustrd).Where(a => !string.IsNullOrEmpty(a)))
+                            {
+                                set.Add(info.Trim());
+                            }
+                        }
+                    }
+                }
+            }
+
+            return string.Join(" / ", set);
+        }
+
+        private IReadOnlyList<string> SplitForNewline(string text)
+        {
+            return text.Split('\n');
         }
 
         public string ValidateAccountStatement(AccountStatement accountStatement)
