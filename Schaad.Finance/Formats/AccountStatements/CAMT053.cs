@@ -93,20 +93,14 @@ namespace Schaad.Finance.Formats.AccountStatements
                         {
                             foreach (var entry in stmt.Ntry)
                             {
+                                 (var text, var debtor, var creditor) = ParseEntry(entry);
+
                                 var transaction = new Transaction();
-                                accountStatement.Transactions.Add(transaction);
-
-                                // var amount = entry.Amt.Value;
-                                // var currency = entry.Amt.Ccy;
-                                // var valueDate = entry.ValDt.Item;
-                                // var bookingDate = entry.BookgDt.Item;
-                                //var creditDepit = entry.CdtDbtInd;
-                                // var trxId = entry.NtryRef;
-                                // var text = entry.AddtlNtryInf;
-
                                 transaction.Id = stmt.Id + entry.NtryRef;
                                 transaction.BookingDate = entry.BookgDt.Item;
-                                transaction.Text = ParseEntry(entry);
+                                transaction.Text = text;
+                                transaction.Debtor = debtor;
+                                transaction.Creditor = creditor;
                                 transaction.Value = (double)entry.Amt.Value;
                                 transaction.ValueDate = entry.ValDt.Item;
 
@@ -114,6 +108,8 @@ namespace Schaad.Finance.Formats.AccountStatements
                                 {
                                     transaction.Value *= -1;
                                 }
+
+                                accountStatement.Transactions.Add(transaction);
                             }
                         }
                     }
@@ -123,13 +119,21 @@ namespace Schaad.Finance.Formats.AccountStatements
             return accountStatements;
         }
 
-        private string ParseEntry(ReportEntry4 entry)
+        private (string text, string debtor, string creditor) ParseEntry(ReportEntry4 entry)
         {
-            var set = new HashSet<string>();
-            foreach (var addtlNtryInf in SplitForNewline(entry.AddtlNtryInf).Where(a => !string.IsNullOrEmpty(a)))
+            var transactionTexts = new HashSet<string>();
+            var transactionReferences = new HashSet<string>();
+            var debtors = new HashSet<string>();
+            var creditors = new HashSet<string>();
+
+            if (!string.IsNullOrEmpty(entry.AddtlNtryInf))
             {
-                set.Add(addtlNtryInf);
+                foreach (var addtlNtryInf in SplitForNewline(entry.AddtlNtryInf).Where(a => !string.IsNullOrEmpty(a)))
+                {
+                    transactionTexts.Add(addtlNtryInf);
+                }
             }
+
             foreach (var ntryDtl in entry.NtryDtls)
             {
                 foreach (var txDtl in ntryDtl.TxDtls)
@@ -140,19 +144,80 @@ namespace Schaad.Finance.Formats.AccountStatements
                         {
                             foreach (var info in SplitForNewline(ustrd).Where(a => !string.IsNullOrEmpty(a)))
                             {
-                                set.Add(info.Trim());
+                                transactionTexts.Add(info.Trim());
                             }
                         }
+                    }
+
+                    if (txDtl.RltdPties?.Cdtr != null)
+                    {
+                        creditors.Add(ParseRelatedParty(txDtl.RltdPties.Cdtr));
+                    }
+
+                    if (txDtl.RltdPties?.Dbtr != null)
+                    {
+                        debtors.Add(ParseRelatedParty(txDtl.RltdPties.Dbtr));
+                    }
+
+                    if (txDtl.Refs != null)
+                    {
+                        transactionReferences.Add(ParseTransactionReference(txDtl.Refs));
                     }
                 }
             }
 
-            return string.Join(" / ", set);
+            var debtorsText = GetText(debtors);
+            var creditorsText = GetText(creditors);
+            var transactionTexts1 = transactionTexts.Count > 0 ? GetText(transactionTexts) : GetText(transactionReferences);
+
+            return (transactionTexts1, debtorsText, creditorsText);
+        }
+
+        private string ParseRelatedParty(PartyIdentification43 entry)
+        {
+            var texts = new HashSet<string>();
+            AddIfNotEmpty(texts, entry.Nm);
+            if (entry.PstlAdr != null)
+            {
+                AddIfNotEmpty(texts, entry.PstlAdr.StrtNm);
+                AddIfNotEmpty(texts, entry.PstlAdr.PstCd);
+                AddIfNotEmpty(texts, entry.PstlAdr.TwnNm);
+
+                foreach (var line in entry.PstlAdr.AdrLine)
+                {
+                    AddIfNotEmpty(texts, line);
+                }
+            }
+
+            return GetAddress(texts);
+        }
+
+        private string ParseTransactionReference(TransactionReferences3 entry)
+        {
+            return entry.InstrId;
         }
 
         private IReadOnlyList<string> SplitForNewline(string text)
         {
             return text.Split('\n');
+        }
+
+        private string GetText(HashSet<string> lines)
+        {
+            return string.Join(" / ", lines);
+        }
+
+        private string GetAddress(HashSet<string> lines)
+        {
+            return string.Join(" ", lines);
+        }
+
+        private void AddIfNotEmpty(HashSet<string> lines, string value)
+        {
+            if (!string.IsNullOrWhiteSpace(value))
+            {
+                lines.Add(value);
+            }
         }
 
         public string ValidateAccountStatement(AccountStatement accountStatement)

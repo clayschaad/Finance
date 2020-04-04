@@ -37,6 +37,10 @@ namespace Schaad.Finance.Api.AccountStatements
 
         public string Text { get; set; }
 
+        public string Debtor { get; set; }
+
+        public string Creditor { get; set; }
+
         private string GetHashString(string inputString)
         {
             var sb = new StringBuilder();
