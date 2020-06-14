@@ -38,7 +38,7 @@ namespace Schaad.Finance.Services
         {
             using (var reader = new StreamReader(filePath, encoding))
             {
-                using (var csv = new CsvReader(reader))
+                using (var csv = new CsvReader(reader, CultureInfo.CurrentCulture))
                 {
                     csv.Configuration.RegisterClassMap<Formats.CreditCardProvider.CembraMap>();
                     var records = csv.GetRecords<CreditCardTransaction>();

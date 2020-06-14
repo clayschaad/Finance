@@ -14,3 +14,6 @@
 /Schaad.Finance/bin/Release/netstandard2.0
 /Schaad.Finance.Tests/bin/Release/netcoreapp2.0
 /Schaad.Finance.Api/bin/Release/netstandard2.0
+/Schaad.Finance/bin/Release/netstandard2.1
+/Schaad.Finance.Api/bin/Release/netstandard2.1
+/Schaad.Finance.Tests/bin/Release/netcoreapp3.1
