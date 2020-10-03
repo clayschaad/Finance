@@ -183,9 +183,12 @@ namespace Schaad.Finance.Formats.AccountStatements
                 AddIfNotEmpty(texts, entry.PstlAdr.PstCd);
                 AddIfNotEmpty(texts, entry.PstlAdr.TwnNm);
 
-                foreach (var line in entry.PstlAdr.AdrLine)
+                if (entry.PstlAdr.AdrLine != null)
                 {
-                    AddIfNotEmpty(texts, line);
+                    foreach (var line in entry.PstlAdr.AdrLine)
+                    {
+                        AddIfNotEmpty(texts, line);
+                    }
                 }
             }
 
