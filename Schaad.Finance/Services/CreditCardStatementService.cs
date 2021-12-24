@@ -40,7 +40,7 @@ namespace Schaad.Finance.Services
             {
                 using (var csv = new CsvReader(reader, CultureInfo.CurrentCulture))
                 {
-                    csv.Configuration.RegisterClassMap<Formats.CreditCardProvider.CembraMap>();
+                    csv.Context.RegisterClassMap<Formats.CreditCardProvider.CembraMap>();
                     var records = csv.GetRecords<CreditCardTransaction>();
                     return records.ToList();
                 }
