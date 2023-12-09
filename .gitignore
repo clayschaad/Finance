@@ -24,3 +24,6 @@
 /Schaad.Finance.Tests/bin/Debug/net5.0
 /Schaad.Finance.Tests/bin/Release/net5.0
 /Schaad.Finance.Api/bin/Release/net5.0
+/Schaad.Finance/bin/**
+/Schaad.Finance.Api/bin/**
+/Schaad.Finance.Tests/bin/**
